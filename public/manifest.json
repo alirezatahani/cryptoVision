@@ -1,0 +1,21 @@
+{
+	"manifest_version": 3,
+	"name": "Crypto Vision",
+	"description": "RealTime updates at your fingertips",
+	"version": "0.0.1",
+	"action": {
+		"default_popup": "index.html",
+		"default_title": "Open",
+		"default_icon": {
+			"16": "./logo1.png",
+			"32": "./logo1.png",
+			"48": "./logo1.png",
+			"128": "./logo1.png"
+		}
+	},
+	"icons": {
+		"16": "./logo1.png"
+	},
+
+	"host_permissions": ["http://*/*", "https://*/*"]
+}
