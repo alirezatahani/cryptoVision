@@ -9,12 +9,14 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin"); // installed via
 module.exports = {
 	mode: "development",
 	entry: {
-		app: "./src/index.tsx",
+		bundle: "./src/index.tsx",
+		background: "./src/background.ts",
+		content: "./src/content.tsx",
 	},
 	output: {
 		path: path.resolve(__dirname, "dist"),
 		publicPath: "/",
-		filename: "bundle.js",
+		filename: "[name].js",
 	},
 	module: {
 		rules: [
@@ -51,7 +53,7 @@ module.exports = {
 	},
 	resolve: {
 		plugins: [new TsconfigPathsPlugin({})],
-		extensions: [".tsx", ".ts", ".js"],
+		extensions: [".tsx", ".ts", ".js", ".jsx"],
 	},
 	devServer: {
 		open: true,
@@ -83,7 +85,6 @@ module.exports = {
 					from: path.resolve("./public/manifest.json"),
 					to: path.resolve(__dirname, "dist"),
 				},
-
 				{
 					from: path.resolve("./public/logo1.png"),
 					to: path.resolve(__dirname, "dist"),

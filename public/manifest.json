@@ -4,8 +4,8 @@
 	"description": "RealTime updates at your fingertips",
 	"version": "0.0.1",
 	"action": {
+		"default_title": "RealTime updates at your fingertips",
 		"default_popup": "index.html",
-		"default_title": "Open",
 		"default_icon": {
 			"16": "./logo1.png",
 			"32": "./logo1.png",
@@ -13,6 +13,15 @@
 			"128": "./logo1.png"
 		}
 	},
+	"content_security_policy": {
+		"extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self';",
+		"sandbox": "sandbox allow-scripts allow-forms allow-popups allow-modals; script-src 'self' 'unsafe-inline' 'unsafe-eval'; child-src 'self';"
+	},
+	"permissions": ["storage", "activeTab", "scripting"],
+	"background": {
+		"service_worker": "background.js"
+	},
+
 	"icons": {
 		"16": "./logo1.png"
 	},

@@ -1,20 +1,32 @@
 import * as React from "react";
-import { useAppDispatch, useAppSelector } from "@hooks/hooks";
-import { FavoriteActionHandler } from "@redux/favoriteCoins/favoriteAction";
 import { AddToFavProps } from "./addToFav_type";
 import { FavBtn, StarFilled, StarOutlined } from "./addToFavorite.style";
+import { loadState, saveState } from "@utils/localStorage";
+import { useState } from "react";
 
 export const AddToFavoriteSection: React.FC<AddToFavProps> = ({ uuid }) => {
-	const { favoriteList } = useAppSelector((state) => state.FavoriteReducer);
-	const dispatch = useAppDispatch();
+	const [favList, setFavList] = useState(loadState("favCoins"));
 
 	const favoriteAction = () => {
-		dispatch(FavoriteActionHandler(uuid));
+		if (favList?.includes(uuid)) {
+			const newArray = favList?.filter((item: string) => item !== uuid);
+
+			saveState(newArray, "favCoins");
+			setFavList(newArray);
+		} else {
+			saveState([...favList, uuid], "favCoins");
+			setFavList([...favList, uuid]);
+		}
 	};
 
 	return (
-		<FavBtn onClick={() => favoriteAction()}>
-			{favoriteList.some((item: {}) => uuid === item) ? (
+		<FavBtn
+			onClick={(e) => {
+				e.stopPropagation();
+				favoriteAction();
+			}}
+		>
+			{favList?.some((item: {}) => uuid === item) ? (
 				<StarFilled />
 			) : (
 				<StarOutlined />
