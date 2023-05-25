@@ -1,5 +1,4 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import { favoriteReducer } from "./favoriteCoins/favoriteReducer";
 import { stackReducer } from "./stack/stackReducer";
 import { loadState } from "@utils/localStorage";
 import { themeReducer } from "./userTheme/userThemeReducer";
@@ -7,7 +6,6 @@ import { referenceCurrencyReducer } from "./referenceCurrency/referenceCurrencyR
 import { timePeriodReducer } from "./timePeriod/timePeriodReducer";
 
 const reducer = combineReducers({
-	FavoriteReducer: favoriteReducer,
 	stack: stackReducer,
 	theme: themeReducer,
 	referenceCurrency: referenceCurrencyReducer,

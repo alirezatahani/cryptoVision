@@ -11,6 +11,7 @@ export const loadState = (name: string = "appState") => {
 };
 export const saveState = (state: any, name: string = "appState") => {
 	try {
+		console.log(name, "name");
 		const serialState = JSON.stringify(state);
 		localStorage.setItem(name, serialState);
 	} catch (err) {

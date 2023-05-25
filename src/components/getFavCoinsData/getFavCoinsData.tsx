@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
-import { Spin } from "antd";
+import { Col, Row, Spin } from "antd";
 import { parseCookies, setCookie, destroyCookie } from "nookies";
 import useFetch from "@hooks/useFetch";
 import { convertToQuery } from "@utils/queries";
 import { GetCoinsDataProps, CoinInterface } from "@customTypes/index";
 import { CoinListContainer } from "./coinList.style";
 import { FavCoinItem } from "@components/favCoinItem/favCoinItem";
+import useWebSocket from "react-use-websocket";
 
 export const GetFavCoinsData: React.FC<GetCoinsDataProps> = ({
 	queries,
@@ -20,38 +21,29 @@ export const GetFavCoinsData: React.FC<GetCoinsDataProps> = ({
 
 	useEffect(() => {
 		const url = makingUrl();
-		!!cookies.coins &&
-			!!cookies.coins.length &&
-			fetchCoinsData({ url: `/coins?${url}`, method: "get" });
-	}, [queries]);
 
-	useEffect(() => {
-		if (data && data.data && data.data.coins) {
-			setCookie(null, "coins", JSON.stringify(data.data.coins), {
-				maxAge: 30 * 24 * 60 * 60,
-				path: "/",
-			});
-		} else {
-			setCookie(null, "coins", "[]", {
-				maxAge: 30 * 24 * 60 * 60,
-				path: "/",
-			});
-		}
-	}, [data]);
+		fetchCoinsData({ url: `/coins?${url}`, method: "get" });
+	}, [queries]);
 
 	return loading ? (
 		<Spin />
 	) : (
 		<CoinListContainer>
-			{data &&
-				data.data &&
-				data.data.coins &&
-				data.data.coins.map((coin: CoinInterface) => {
+			<Row style={{ height: "100%" }}>
+				{data?.data?.coins?.map((coin: CoinInterface) => {
 					const { uuid } = coin;
 					return (
-						<FavCoinItem key={uuid} {...coin} currencySign={currencySign} />
+						<div
+							style={{
+								width: `${100 / data?.data?.coins?.length ?? 1}%`,
+								position: "relative",
+							}}
+						>
+							<FavCoinItem key={uuid} {...coin} currencySign={currencySign} />
+						</div>
 					);
 				})}
+			</Row>
 		</CoinListContainer>
 	);
 };

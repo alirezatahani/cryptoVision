@@ -1,6 +1,6 @@
 import React from "react";
 import { Container } from "./webSider.style";
-import { FavoriteCoinsList } from "@components/favCoinsList";
+import { FavoriteCoinsList } from "@components/favCoinItem/favCoinsList";
 
 export const WebSider = () => {
 	return (

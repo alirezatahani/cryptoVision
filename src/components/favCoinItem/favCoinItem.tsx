@@ -1,77 +1,97 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { CoinInterface } from "@customTypes/index";
 import Highcharts from "highcharts/highstock";
 import Chart from "highcharts-react-official";
 import { useRouter } from "@utils/router";
-import { littleChartConfig } from "@lib/littleChartConfig";
+import { areaChartConfig } from "@lib/areaChartConfig";
 import { AddToFavoriteSection } from "@components/addToFav";
 import { CoinPriceSection } from "@components/coinPrice";
-import { CoinDesc, CoinName, CoinContent } from "./coinItem.style";
-import { Col, Row } from "antd";
+import {
+	CoinDesc,
+	CoinUpdater,
+	CoinContent,
+	CoinSymbol,
+} from "./coinItem.style";
+import { Col, Row, Spin } from "antd";
+import useFetch from "@hooks/useFetch";
 
 export const FavCoinItem: React.FC<CoinInterface> = ({
 	currencySign,
 	...coin
 }) => {
 	const { goTo } = useRouter();
-	const { name, iconUrl, price, uuid, sparkline } = coin;
+	const [shouldUpdate, setShouldUpdate] = useState<boolean>(false);
+	const [{ loading, data }, fetchCoinData] = useFetch();
+
+	useEffect(() => {
+		setInterval(() => {
+			fetchCoinData({
+				url: `/coins?uuids=${coin.uuid}&timePeriod=1h`,
+				method: "get",
+			});
+		}, 9000);
+	}, []);
+
+	useEffect(() => {
+		if (data?.data?.coins?.[0] && !loading) {
+			setShouldUpdate(true);
+		} else {
+			setShouldUpdate(false);
+		}
+	}, [data, loading]);
+
+	const { name, iconUrl, price, change, sparkline, symbol } =
+		data?.data?.coins?.[0] ?? coin;
 
 	return (
-		<CoinContent
-			onClick={() => {
-				goTo(`:${uuid}`);
-			}}
-		>
+		<CoinContent>
+			{shouldUpdate && <CoinUpdater change={Number(change)} />}
 			<Row style={{ width: "100%" }}>
-				<Col
-					span={7}
-					style={{
-						display: "flex",
-						alignItems: "center",
-						justifyContent: "flex-start",
-					}}
-				>
+				<Col span={8}>
 					<CoinDesc>
 						<img src={iconUrl} style={{ width: 40 }} />
-						<CoinName>{name}</CoinName>
+						<CoinSymbol>{symbol}</CoinSymbol>{" "}
 					</CoinDesc>
 				</Col>
 				<Col
-					span={8}
+					span={16}
 					style={{
+						height: 100,
 						display: "flex",
-						alignItems: "center",
-						justifyContent: "center",
+						alignItems: "flex-start",
+						position: "relative",
+						zIndex: 2,
+						gap: 12,
 					}}
 				>
 					<CoinPriceSection price={price} currencySign={currencySign} />
 				</Col>
-				<Col
-					span={8}
+				<div
 					style={{
-						display: "flex",
-						alignItems: "center",
-						justifyContent: "center",
+						position: "absolute",
+						right: 0,
+						bottom: 0,
+						background: "linear-gradient(90deg, #0a1222 28%, transparent)",
+						zIndex: 1,
+						width: 380,
+						height: 100,
+					}}
+				/>
+				<div
+					style={{
+						position: "absolute",
+						right: 0,
+						bottom: 0,
 					}}
 				>
 					{sparkline && (
 						<Chart
 							style={{ flex: 1 }}
 							highcharts={Highcharts}
-							options={littleChartConfig(coin)}
+							options={areaChartConfig(coin)}
 						/>
 					)}
-				</Col>
-				<Col
-					span={1}
-					style={{
-						display: "flex",
-						alignItems: "center",
-						justifyContent: "center",
-					}}
-				>
-					<AddToFavoriteSection uuid={uuid} />
-				</Col>
+				</div>
 			</Row>
 		</CoinContent>
 	);

@@ -11,5 +11,6 @@ export const Container = styled("div")(() => ({
 	bottom: 0,
 	left: 0,
 
+	borderRadius: "8px 8px 0 0",
 	zIndex: 9999,
 }));

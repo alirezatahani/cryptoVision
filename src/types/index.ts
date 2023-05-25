@@ -6,6 +6,7 @@ export interface CoinInterface {
 	uuid?: string;
 	currencySign?: string;
 	sparkline?: [];
+	[x: string]: any;
 }
 export type CurrencyOptions = {
 	uuid: string;

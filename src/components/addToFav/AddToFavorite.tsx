@@ -5,20 +5,32 @@ import { loadState, saveState } from "@utils/localStorage";
 import { useState } from "react";
 
 export const AddToFavoriteSection: React.FC<AddToFavProps> = ({ uuid }) => {
-	const [favList, setFavList] = useState(loadState("favCoins"));
+	const [favList, setFavList] = useState(loadState("favCoins") ?? []);
 
 	const favoriteAction = () => {
-		if (favList?.includes(uuid)) {
-			const newArray = favList?.filter((item: string) => item !== uuid);
+		setFavList((prevFavList: any) => {
+			console.log(uuid, "uuid");
+			console.log(prevFavList, "prevFavList");
 
-			saveState(newArray, "favCoins");
-			setFavList(newArray);
-		} else {
-			saveState([...favList, uuid], "favCoins");
-			setFavList([...favList, uuid]);
-		}
+			if (prevFavList?.includes(uuid)) {
+				const newArray = prevFavList?.filter((item: string) => {
+					console.log(item, "item");
+					if (item !== uuid) {
+						return item;
+					}
+				});
+
+				saveState(newArray, "favCoins");
+				return newArray;
+			} else {
+				console.log(uuid, "uuid");
+
+				saveState([...prevFavList, uuid], "favCoins");
+				return [...prevFavList, uuid];
+			}
+		});
 	};
-
+	console.log(favList, "favList");
 	return (
 		<FavBtn
 			onClick={(e) => {

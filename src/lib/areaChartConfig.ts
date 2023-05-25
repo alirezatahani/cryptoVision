@@ -1,8 +1,9 @@
 import { theme } from "@global/Global";
 import moment from "moment";
 import { CoinInterface } from "@customTypes/index";
+import Highcharts from "highcharts";
 
-export const littleChartConfig = (coin: CoinInterface) => {
+export const areaChartConfig = (coin: CoinInterface) => {
 	const series = coin.sparkline.map((item: string, index: number) => {
 		return [
 			moment()
@@ -12,19 +13,10 @@ export const littleChartConfig = (coin: CoinInterface) => {
 		];
 	});
 
-	const priceChange = () => {
-		if (Number(coin.change) === null) return 0;
-		return Number(coin.change) > 0 ? `+${coin.change} %` : `${coin.change} %`;
-	};
-
-	const upOrDown = Number(coin.change >= 0)
-		? theme.palette.success[400]
-		: theme.palette.danger[400];
-
 	const options = {
 		chart: {
-			height: 40,
-			width: 130,
+			height: 80,
+			width: 300,
 			backgroundColor: "transparent",
 			spacing: [0, 1, 0, 50],
 		},
@@ -48,7 +40,7 @@ export const littleChartConfig = (coin: CoinInterface) => {
 					? [theme.palette.success.main]
 					: [theme.palette.danger.main],
 			},
-			text: priceChange(),
+			text: "",
 			verticalAlign: "center",
 			x: -50,
 			y: 25,
@@ -84,6 +76,7 @@ export const littleChartConfig = (coin: CoinInterface) => {
 		yAxis: [
 			{
 				type: "logarithmic",
+
 				title: {
 					text: "",
 				},
@@ -93,7 +86,6 @@ export const littleChartConfig = (coin: CoinInterface) => {
 		],
 		xAxis: [
 			{
-				type: "datetime",
 				title: {
 					text: "",
 				},

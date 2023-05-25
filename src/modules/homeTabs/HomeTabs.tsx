@@ -8,7 +8,7 @@ import { TabContainer, Tab, HomeContent, Card } from "./HomeTabs.styles";
 
 const HomeTabs = () => {
 	const { sign, value } = useAppSelector((state) => state.referenceCurrency);
-	const timePeriod = useAppSelector((state) => state.timePeriod.timePeriod);
+	const timePeriod = "3h";
 
 	const [limit, setLimit] = useState(5);
 	const [selectedTab, setSelectedTab] = useState(1);

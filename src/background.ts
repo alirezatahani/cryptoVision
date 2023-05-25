@@ -9,7 +9,7 @@ export const injectContentScript = (tab: any) => {
 	const { id, url } = tab;
 	//@ts-ignore
 	chrome.scripting.executeScript({
-		target: { tabId: id, allFrames: true },
+		target: { tabId: id, allFrames: false },
 		files: ["./content.js"],
 	});
 	console.log(`Loading: ${url}`);

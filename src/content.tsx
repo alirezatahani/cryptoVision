@@ -2,8 +2,11 @@ import React from "react";
 import Injected from "./Injected";
 import ReactDOM from "react-dom/client";
 
-const inject = () => {
-	if (!document.querySelector("#CV")) {
+(function inject() {
+	if (
+		!document.querySelector("#CV") &&
+		!document.querySelector("#cryptoVision")
+	) {
 		const app = document.createElement("div");
 		app.id = "CV";
 		document.body.appendChild(app);
@@ -11,6 +14,4 @@ const inject = () => {
 		const root = ReactDOM.createRoot(document.getElementById("CV"));
 		root.render(<Injected />);
 	}
-};
-
-inject();
+})();

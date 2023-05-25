@@ -4,12 +4,12 @@ import { GetFavCoinsData } from "@components/getFavCoinsData";
 import { loadState } from "@utils/localStorage";
 
 export const FavoriteCoinsList: React.FC = () => {
-	const favoriteList = loadState("favCoins");
+	const favoriteList = loadState("favCoins") ?? [];
 	const { sign, value } = useAppSelector((state) => state.referenceCurrency);
-	const timePeriod = useAppSelector((state) => state.timePeriod.timePeriod);
+	const timePeriod = "3h";
 
-	const uuidsString = favoriteList?.favoriteList
-		.map((item: string, index: number) => {
+	const uuidsString = favoriteList
+		?.map((item: string, index: number) => {
 			let query = "";
 			if (index === 0) query = item;
 			else query = `uuids[]=${item}`;
@@ -17,12 +17,11 @@ export const FavoriteCoinsList: React.FC = () => {
 		})
 		.join("&");
 
-	console.log(favoriteList, "favoriteList");
 	return (
 		<GetFavCoinsData
 			queries={{
-				uuids: uuidsString,
 				timePeriod,
+				limit: 5,
 				referenceCurrencyUuid: value,
 			}}
 			currencySign={sign}
