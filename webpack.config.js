@@ -12,6 +12,7 @@ module.exports = {
 		bundle: "./src/index.tsx",
 		background: "./src/background.ts",
 		content: "./src/content.tsx",
+		removeFavCoinsFromDOM: "./src/removeFavCoinsFromDOM.tsx",
 	},
 	output: {
 		path: path.resolve(__dirname, "dist"),

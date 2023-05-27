@@ -14,3 +14,12 @@ export const injectContentScript = (tab: any) => {
 	});
 	console.log(`Loading: ${url}`);
 };
+export const removeContentScript = (tab: any) => {
+	const { id, url } = tab;
+	//@ts-ignore
+	chrome.scripting.executeScript({
+		target: { tabId: id, allFrames: false },
+		files: ["./removeFavCoinsFromDOM.js"],
+	});
+	console.log(`Loading: ${url}`);
+};

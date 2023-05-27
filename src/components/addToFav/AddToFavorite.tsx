@@ -9,12 +9,8 @@ export const AddToFavoriteSection: React.FC<AddToFavProps> = ({ uuid }) => {
 
 	const favoriteAction = () => {
 		setFavList((prevFavList: any) => {
-			console.log(uuid, "uuid");
-			console.log(prevFavList, "prevFavList");
-
 			if (prevFavList?.includes(uuid)) {
 				const newArray = prevFavList?.filter((item: string) => {
-					console.log(item, "item");
 					if (item !== uuid) {
 						return item;
 					}
@@ -23,14 +19,11 @@ export const AddToFavoriteSection: React.FC<AddToFavProps> = ({ uuid }) => {
 				saveState(newArray, "favCoins");
 				return newArray;
 			} else {
-				console.log(uuid, "uuid");
-
 				saveState([...prevFavList, uuid], "favCoins");
 				return [...prevFavList, uuid];
 			}
 		});
 	};
-	console.log(favList, "favList");
 	return (
 		<FavBtn
 			onClick={(e) => {
