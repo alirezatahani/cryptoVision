@@ -21,7 +21,7 @@ const CoinItem: React.FC<CoinInterface> = ({ currencySign, ...coin }) => {
 		>
 			<Row style={{ width: "100%" }}>
 				<Col
-					span={7}
+					span={4}
 					style={{
 						display: "flex",
 						alignItems: "center",
@@ -30,21 +30,22 @@ const CoinItem: React.FC<CoinInterface> = ({ currencySign, ...coin }) => {
 				>
 					<CoinDesc>
 						<img src={iconUrl} style={{ width: 40 }} />
-						<CoinName>{name}</CoinName>
 					</CoinDesc>
 				</Col>
 				<Col
 					span={8}
 					style={{
 						display: "flex",
-						alignItems: "center",
+						alignItems: "flex-start",
 						justifyContent: "center",
+						flexDirection: "column",
 					}}
 				>
+					<CoinName>{name}</CoinName>
 					<CoinPriceSection price={price} currencySign={currencySign} />
 				</Col>
 				<Col
-					span={8}
+					span={10}
 					style={{
 						display: "flex",
 						alignItems: "center",
@@ -60,7 +61,7 @@ const CoinItem: React.FC<CoinInterface> = ({ currencySign, ...coin }) => {
 					)}
 				</Col>
 				<Col
-					span={1}
+					span={2}
 					style={{
 						display: "flex",
 						alignItems: "center",

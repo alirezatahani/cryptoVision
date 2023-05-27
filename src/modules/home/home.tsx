@@ -12,10 +12,10 @@ export const Home = () => {
 	return (
 		<Container>
 			<HomeTabs />
-			<button id="theButton" onClick={handleInject}>
+			{/* <button id="theButton" onClick={handleInject}>
 				inject
 			</button>
-			<button id="mybutton">click me</button>{" "}
+			<button id="mybutton">click me</button>{" "} */}
 		</Container>
 	);
 };

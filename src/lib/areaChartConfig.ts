@@ -58,7 +58,7 @@ export const areaChartConfig = (coin: CoinInterface) => {
 						[
 							0,
 							Number(coin.change >= 0)
-								? [theme.palette.success.main]
+								? "#83e6b1"
 								: [theme.palette.danger.main],
 						],
 						[1, "transparent"],

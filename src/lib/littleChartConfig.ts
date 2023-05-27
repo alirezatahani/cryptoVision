@@ -42,12 +42,19 @@ export const littleChartConfig = (coin: CoinInterface) => {
 		},
 		caption: {
 			align: "top",
-			floating: false,
+			floating: true,
 			style: {
 				color: Number(coin.change >= 0)
 					? [theme.palette.success.main]
 					: [theme.palette.danger.main],
+				fillColor: "#fff",
+				background: "#fff",
+				borderRadius: 8,
+				width: 30,
+				height: 20,
+				fontFamily: "roboto",
 			},
+
 			text: priceChange(),
 			verticalAlign: "center",
 			x: -50,
@@ -66,8 +73,9 @@ export const littleChartConfig = (coin: CoinInterface) => {
 						[
 							0,
 							Number(coin.change >= 0)
-								? [theme.palette.success.main]
-								: [theme.palette.danger.main],
+								? // ? "#83e6b1"
+								  "#83e6b13b"
+								: "#d9687240",
 						],
 						[1, "transparent"],
 					],

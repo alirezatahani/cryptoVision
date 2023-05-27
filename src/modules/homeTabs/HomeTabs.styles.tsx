@@ -5,20 +5,20 @@ export const Card = styled.div(({ theme }) => ({
 	display: "flex",
 	alignItems: "center",
 	justifyContent: "center",
-	backgroundColor: "#ffffff14",
 
 	borderRadius: 8,
 	marginTop: 24,
 
 	width: "100%",
 	height: "100%",
+	minHeight: 300,
 }));
 export const TabContainer = styled.div(({ theme }) => ({
 	display: "flex",
 	alignItems: "center",
 	justifyContent: "space-between",
-	width: " 70%",
-	margin: "auto",
+	width: 400,
+	margin: 0,
 }));
 export const HomeContent = styled.div(({ theme }) => ({
 	display: "flex",

@@ -1,8 +1,8 @@
 import * as React from "react";
-import { Home } from "@modules/home";
-import { CoinPage } from "@modules/coinPage";
+import { Home } from "@pages/Home";
+import { Coin } from "@pages/Coin";
 
 export const routes = [
 	{ to: "/", component: <Home /> },
-	{ to: "/:coinUuid", component: <CoinPage /> },
+	{ to: "/:coinUuid", component: <Coin /> },
 ];

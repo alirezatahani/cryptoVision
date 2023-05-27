@@ -1,9 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div(() => ({
-	backgroundColor: "#081222",
+	backgroundColor: "#1f2022",
 	color: "#cecece",
-
-	minWidth: 600,
 	padding: 24,
 }));

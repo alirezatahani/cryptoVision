@@ -6,4 +6,5 @@ export const CoinPrice = styled.p<CoinPriceProps>(({ theme }) => ({
 	textAlign: "start",
 	width: 120,
 	margin: 0,
+	color: "#ffffff73",
 }));

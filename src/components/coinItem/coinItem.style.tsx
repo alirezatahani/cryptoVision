@@ -5,11 +5,13 @@ export const CoinContent = styled.div(({ theme }) => ({
 	alignItems: "center",
 	justifyContent: "space-between",
 	padding: 10,
-	borderBottom: "1px solid #333333",
 	color: theme.palette.text.color,
 	transform: "all 0.5",
-
+	maxWidth: 400,
+	backgroundColor: "#081222",
 	cursor: "pointer",
+	borderRadius: 8,
+	marginBottom: 8,
 	"&:hover": {
 		backgroundColor: "#3d4856",
 		transform: "all 0.5",
